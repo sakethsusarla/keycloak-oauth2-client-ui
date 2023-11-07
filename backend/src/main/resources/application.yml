@@ -1,0 +1,38 @@
+server:
+  port: 4881
+
+spring:
+  application:
+    name: Backend
+  security:
+    oauth2:
+      client:
+        provider:
+          external:
+            issuer-uri: http://localhost:8080/realms/demo
+        registration:
+          demo:
+            provider: external
+            client-name: demo-client
+            client-id: demo-client
+            client-secret: cMh0YzFdrQjuF9Q7twZLxJrubddeuGCS
+            client-authentication-method: client_secret_post
+            scope:
+              - openid
+              - offline_access
+              - profile
+            authorization-grant-type: authorization_code
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, loggers
+  endpoint:
+    health:
+      # update value to "always" in case more health details required
+      show-details: never
+      probes:
+        enabled: true
+    loggers:
+      enabled: true

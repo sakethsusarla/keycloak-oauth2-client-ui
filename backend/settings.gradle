@@ -1,1 +1,3 @@
 rootProject.name = 'keycloak-oauth2-client-ui'
+include 'frontend'
+project(":frontend").projectDir = file("../frontend")

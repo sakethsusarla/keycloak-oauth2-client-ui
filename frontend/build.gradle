@@ -1,0 +1,14 @@
+plugins {
+  id "com.github.node-gradle.node" version "5.0.0"
+}
+
+node {
+  workDir = file("${project.buildDir}/node")
+  nodeModulesDir = file("${project.projectDir}")
+}
+
+task buildApp(type: NpmTask) {
+  args = ['run', 'deploy']
+}
+
+buildApp.dependsOn(npm_install)
