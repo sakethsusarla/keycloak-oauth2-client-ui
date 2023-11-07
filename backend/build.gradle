@@ -28,7 +28,7 @@ task copyPublicResources(type: Copy) {
     into 'src/main/resources/static/'
 }
 
-//copyPublicResources.dependsOn(':frontend:buildApp')
+copyPublicResources.dependsOn(':frontend:buildApp')
 processResources.dependsOn(copyPublicResources)
 
 tasks.named('test') {
