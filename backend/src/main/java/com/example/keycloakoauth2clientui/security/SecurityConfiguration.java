@@ -30,7 +30,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .oauth2Client(withDefaults())
-                .oauth2Login(withDefaults());
+                .oauth2Login(withDefaults())
+                .oidcLogout((logout) -> logout
+                        .backChannel(withDefaults())
+                );
 
         httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer ->
                 httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
