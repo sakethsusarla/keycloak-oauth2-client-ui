@@ -4,6 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
@@ -44,6 +45,12 @@ public class TokenExpirationFilter extends OncePerRequestFilter {
             if (accessToken.getExpiresAt() != null && accessToken.getExpiresAt().isBefore(Instant.now())) {
                 SecurityContextHolder.getContext().setAuthentication(null);
                 SecurityContextHolder.clearContext();
+
+                final HttpSession httpSession = request.getSession();
+
+                if (httpSession != null) {
+                    httpSession.invalidate();
+                }
             }
         }
 
